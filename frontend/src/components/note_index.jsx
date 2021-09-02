@@ -1,17 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchNotes } from '../actions/note_actions';
+import { fetchNotes, deleteNote } from '../actions/note_actions';
 
 import NoteForm from './note_form';
 
 class NoteIndex extends React.Component {
 
     constructor(props){
-        super(props)
+        super(props);
+
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
         this.props.fetchNotes();
+    }
+
+    handleDelete(noteId){
+        //debugger
+        this.props.deleteNote(noteId);
     }
 
     render() {
@@ -20,7 +27,7 @@ class NoteIndex extends React.Component {
         let list = this.props.notes.map((note, index)=>{
             return(
                 <li key={"note #" + index}>
-                    {`Title: ${note.title}, Content: ${note.content}`}
+                    {`Title: ${note.title}, Content: ${note.content}`} <button onClick={()=>this.handleDelete(note._id)}>Delete</button>
                 </li>
             )
         });
@@ -45,7 +52,8 @@ const mstp = (state) => {
 
 const mdtp = (dispatch) => {
     return {
-        fetchNotes: () => dispatch(fetchNotes())
+        fetchNotes: () => dispatch(fetchNotes()),
+        deleteNote: (noteId) => dispatch(deleteNote(noteId))
     }
 }
 

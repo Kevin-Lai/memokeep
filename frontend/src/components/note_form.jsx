@@ -28,6 +28,11 @@ class NoteForm extends React.Component {
         e.preventDefault();
 
         this.props.createNote(this.state);
+
+        this.setState({
+            title: "",
+            content: ""
+        });
     }
 
     render() {
