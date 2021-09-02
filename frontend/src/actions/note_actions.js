@@ -7,7 +7,7 @@ export const removeNote = createAction('REMOVE_NOTE');
 
 export const fetchNotes = () => async dispatch => {
     try {
-        const res = await axios.get('/api/notes/');
+        const res = await axios.get('http://localhost:5000/api/notes/');
         dispatch(receiveNotes(res.data));
     }
     catch (err) {
@@ -17,7 +17,7 @@ export const fetchNotes = () => async dispatch => {
 
 export const fetchNote = (noteId) => async dispatch => {
     try {
-        const res = await axios.get(`/api/notes/${noteId}`);
+        const res = await axios.get(`http://localhost:5000/api/notes/${noteId}`);
         dispatch(receiveNote(res.data));
     }
     catch (err) {
@@ -27,7 +27,7 @@ export const fetchNote = (noteId) => async dispatch => {
 
 export const createNote = note => async dispatch => {
     try {
-        const res = await axios.post('/api/notes/', note);
+        const res = await axios.post('http://localhost:5000/api/notes/', note);
         dispatch(receiveNote(res.data));
     }
     catch (err) {
@@ -37,7 +37,7 @@ export const createNote = note => async dispatch => {
 
 export const updateNote = note => async dispatch => {
     try {
-        const res = await axios.patch(`/api/notes/${note._id}`, note);
+        const res = await axios.patch(`http://localhost:5000/api/notes/${note._id}`, note);
         dispatch(receiveNote(res.data));
     }
     catch (err) {
@@ -47,7 +47,7 @@ export const updateNote = note => async dispatch => {
 
 export const deleteNote = noteId => async dispatch => {
     try {
-        const res = await axios.delete(`/api/notes/${noteId}`);
+        const res = await axios.delete(`http://localhost:5000/api/notes/${noteId}`);
         dispatch(removeNote(res.data));
     }
     catch (err) {

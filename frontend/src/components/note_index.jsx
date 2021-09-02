@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchNotes } from '../actions/note_actions';
 
+import NoteForm from './note_form';
+
 class NoteIndex extends React.Component {
 
     constructor(props){
@@ -13,17 +15,31 @@ class NoteIndex extends React.Component {
     }
 
     render() {
+        //debugger
+
+        let list = this.props.notes.map((note, index)=>{
+            return(
+                <li key={"note #" + index}>
+                    {`Title: ${note.title}, Content: ${note.content}`}
+                </li>
+            )
+        });
+
         return(
             <>
-                {this.props.notes}
+                <NoteForm />
+                <ul>
+                    {list ? list : "Hi"}
+                </ul>
             </>
         )
     }
 }
 
 const mstp = (state) => {
+    //debugger
     return {
-        notes: Object.values(state.notes)
+        notes: state.notes ? Object.values(state.notes) : []
     }
 }
 

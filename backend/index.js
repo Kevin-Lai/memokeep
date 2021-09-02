@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express(); // invokes an instance of the 'express' class
 
+const cors = require('cors');
+
 const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
 
@@ -12,6 +14,7 @@ mongoose
     .then(() => console.log("Connected to MongoDB successfully"))
     .catch(err => console.log(err));
 
+app.use(cors());
 app.use(express.json());
 app.use('/api/notes', notes);
 

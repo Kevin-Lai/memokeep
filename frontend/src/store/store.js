@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from 'redux-logger';
-import RootReducer from '../reducers/root_reducer';
+import NotesReducer from '../reducers/notes_reducer';
 
 export const configureAppStore = preloadedState => {
     const store = configureStore({
-        reducer: RootReducer,
+        reducer: NotesReducer,
         middleware: getDefaultMiddleware => getDefaultMiddleware()
             .concat(process.env.NODE_ENV !== 'production' ? logger : []),
         preloadedState
