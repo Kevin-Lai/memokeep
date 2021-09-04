@@ -16,7 +16,6 @@ const NotesReducer = createReducer(initialState, (builder) => {
             state.notes[action.payload._id] = action.payload
         })
         .addCase("REMOVE_NOTE", (state, action) => {
-            // action.payload = noteId
             delete state.notes[action.payload._id];
         })
 });
