@@ -26,7 +26,7 @@ class NoteIndex extends React.Component {
 
         let list = this.props.notes.map((note, index)=>{
             return(
-                <li key={"note #" + index}>
+                <li className="note-list-item" key={"note #" + index}>
                     {`Title: ${note.title}, Content: ${note.content}`} <button onClick={()=>this.handleDelete(note._id)}>Delete</button>
                 </li>
             )
