@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchNotes, deleteNote } from '../actions/note_actions';
 
 import NoteForm from './note_form';
+import './note.css';
 
 class NoteIndex extends React.Component {
 
@@ -33,12 +34,12 @@ class NoteIndex extends React.Component {
         });
 
         return(
-            <>
+            <div className="index">
                 <NoteForm />
                 <ul>
                     {list ? list : "Hi"}
                 </ul>
-            </>
+            </div>
         )
     }
 }

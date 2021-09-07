@@ -1,0 +1,12 @@
+.sidebar-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-block {
+    display: block;
+    position: absolute;
+    left: 20px;
+
+    border: solid black;
+}
