@@ -1,9 +1,29 @@
 import axios from 'axios';
-import { createAction } from '@reduxjs/toolkit';
 
-export const receiveNotes = createAction('RECEIVE_NOTES');
-export const receiveNote = createAction('RECEIVE_NOTE');
-export const removeNote = createAction('REMOVE_NOTE');
+export const RECEIVE_NOTES = "RECEIVE_NOTES";
+export const RECEIVE_NOTE = "RECEIVE_NOTE";
+export const REMOVE_NOTE = "REMOVE_NOTE";
+
+const receiveNotes = (notes) => {
+    return {
+        type: RECEIVE_NOTES,
+        notes
+    }
+}
+
+const receiveNote = (note) => {
+    return {
+        type: RECEIVE_NOTE,
+        note
+    }
+}
+
+const removeNote = (noteId) => {
+    return {
+        type: REMOVE_NOTE,
+        noteId
+    }
+}
 
 export const fetchNotes = () => async dispatch => {
     try {
@@ -47,8 +67,8 @@ export const updateNote = note => async dispatch => {
 
 export const deleteNote = noteId => async dispatch => {
     try {
-        const res = await axios.delete(`http://localhost:5000/api/notes/${noteId}`);
-        dispatch(removeNote(res.data));
+        await axios.delete(`http://localhost:5000/api/notes/${noteId}`);
+        dispatch(removeNote(noteId));
     }
     catch (err) {
         console.log('Unable to delete note');

@@ -1,23 +1,28 @@
-import { createReducer } from "@reduxjs/toolkit";
 
-const initialState = {
-    notes: {}
-};
+import {
+    RECEIVE_NOTES,
+    RECEIVE_NOTE,
+    REMOVE_NOTE
+} from '../actions/note_actions';
 
-const NotesReducer = createReducer(initialState, (builder) => {
-    builder
-        .addCase("RECEIVE_NOTES", (state, action) => {
+const NoteReducer = (state = {}, action) => {
+    Object.freeze(state);
+    let newState = Object.assign({},state);
+    
+    switch (action.type) {
+        case RECEIVE_NOTES:
+            newState = action.notes;
+            return newState;
+        case RECEIVE_NOTE:
+            newState[action.note._id] = action.note;
+            return newState;
+        case REMOVE_NOTE:
             //debugger
-            const notes = {};
-            action.payload.map(note => notes[note._id] = note);
-            state.notes = notes;
-        })
-        .addCase("RECEIVE_NOTE", (state, action) => {
-            state.notes[action.payload._id] = action.payload
-        })
-        .addCase("REMOVE_NOTE", (state, action) => {
-            delete state.notes[action.payload._id];
-        })
-});
+            delete newState[action.noteId];
+            return newState;            
+        default:
+            return state;
+    }
+}
 
-export default NotesReducer;
+export default NoteReducer;

@@ -1,14 +1,19 @@
-import { configureStore } from "@reduxjs/toolkit";
-import logger from 'redux-logger';
-import NotesReducer from '../reducers/notes_reducer';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import RootReducer from '../reducers/root_reducer';
 
-export const configureAppStore = preloadedState => {
-    const store = configureStore({
-        reducer: NotesReducer,
-        middleware: getDefaultMiddleware => getDefaultMiddleware()
-            .concat(process.env.NODE_ENV !== 'production' ? logger : []),
-        preloadedState
-    })
-
-    return store;
+const middlewares = [thunk];
+if (process.env.NODE_ENV !== "production") {
+    const { logger } = require("redux-logger");
+    middlewares.push(logger);
 }
+
+const configureStore = (preloadedState = {}) => (
+    createStore(
+        RootReducer,
+        preloadedState,
+        applyMiddleware(...middlewares)
+    )
+);
+
+export default configureStore;

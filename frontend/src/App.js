@@ -6,12 +6,15 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import NoteIndex from './components/note_index';
 import Sidebar from './components/sidebar';
 
+import Modal from './components/modal';
+
 function App({ store }) {
   return (
     <Provider store={store}>
       <div className="App">
         <header className="App-header">
         <HashRouter>
+          <Modal />
           <Sidebar />
           <Switch>
             <Route exact path="/" component={NoteIndex} /> 

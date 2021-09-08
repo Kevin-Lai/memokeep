@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createNote } from '../actions/note_actions';
 
-class NoteForm extends React.Component {
+class NoteCreateForm extends React.Component {
 
     constructor(props){
         super(props)
@@ -66,4 +66,4 @@ const mdtp = (dispatch) => {
     }
 }
 
-export default connect(null, mdtp)(NoteForm);
+export default connect(null, mdtp)(NoteCreateForm);

@@ -4,13 +4,13 @@ import './index.css';
 import App from './App';
 //import reportWebVitals from './reportWebVitals';
 
-import { configureAppStore } from './store/store';
+import configureStore from './store/store';
 
 document.addEventListener('DOMContentLoaded', () => {
 
   const root = document.getElementById("root");
 
-  const store = configureAppStore({});
+  const store = configureStore({});
   window.getState = store.getState;
 
   ReactDOM.render(

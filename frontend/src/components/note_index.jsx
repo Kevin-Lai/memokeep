@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchNotes, deleteNote } from '../actions/note_actions';
 
-import NoteForm from './note_form';
+import { openModal } from '../actions/modal_actions';
+
+import NoteCreateForm from './note_create_form';
 import './note.css';
 
 class NoteIndex extends React.Component {
@@ -28,14 +30,14 @@ class NoteIndex extends React.Component {
         let list = this.props.notes.map((note, index)=>{
             return(
                 <li className="note-list-item" key={"note #" + index}>
-                    {`Title: ${note.title}, Content: ${note.content}`} <button onClick={()=>this.handleDelete(note._id)}>Delete</button>
+                    <button onClick={()=>this.props.openModal('edit')}>{`Title: ${note.title}, Content: ${note.content}`}</button> <button onClick={()=>this.handleDelete(note._id)}>Delete</button>
                 </li>
             )
         });
 
         return(
             <div className="index">
-                <NoteForm />
+                <NoteCreateForm />
                 <ul>
                     {list ? list : "Hi"}
                 </ul>
@@ -54,7 +56,8 @@ const mstp = (state) => {
 const mdtp = (dispatch) => {
     return {
         fetchNotes: () => dispatch(fetchNotes()),
-        deleteNote: (noteId) => dispatch(deleteNote(noteId))
+        deleteNote: (noteId) => dispatch(deleteNote(noteId)),
+        openModal: (modal) => dispatch(openModal(modal))
     }
 }
 
