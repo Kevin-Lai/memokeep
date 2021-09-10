@@ -30,7 +30,7 @@ class NoteIndex extends React.Component {
         let list = this.props.notes.map((note, index)=>{
             return(
                 <li className="note-list-item" key={"note #" + index}>
-                    <button onClick={()=>this.props.openModal('edit')}>{`Title: ${note.title}, Content: ${note.content}`}</button> <button onClick={()=>this.handleDelete(note._id)}>Delete</button>
+                    <button onClick={()=>this.props.openModal({formType: 'edit', note: note})}>{`Title: ${note.title}, Content: ${note.content}`}</button> <button onClick={()=>this.handleDelete(note._id)}>Delete</button>
                 </li>
             )
         });
@@ -39,7 +39,7 @@ class NoteIndex extends React.Component {
             <div className="index">
                 <NoteCreateForm />
                 <ul>
-                    {list ? list : "Hi"}
+                    {list ? list : ""}
                 </ul>
             </div>
         )

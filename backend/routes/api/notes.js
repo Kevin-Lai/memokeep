@@ -20,6 +20,12 @@ router.post('/', (req, res) => {
         .catch(err => res.status(404).json(err));
 });
 
+router.patch('/:id', (req, res) => {
+    Note.findByIdAndUpdate(req.params.id, {title: req.body.title, content: req.body.content} , { new: true })
+        .then(note => res.json(note))
+        .catch(err => res.status(404).json(err));
+});
+
 router.delete('/:id', (req, res) => {
     Note.findByIdAndDelete(req.params.id)
         .then(note => res.json(note))

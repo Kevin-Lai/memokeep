@@ -10,9 +10,9 @@ function Modal({ modal, closeModal }) {
         return null;
     }
     let component;
-    switch (modal) {
+    switch (modal.formType) {
         case 'edit':
-            component = <NoteEditForm />;
+            component = <NoteEditForm note={modal.note}/>;
             break;
         default:
             return null;

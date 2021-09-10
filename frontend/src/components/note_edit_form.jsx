@@ -6,12 +6,9 @@ import { closeModal } from '../actions/modal_actions';
 class NoteEditForm extends React.Component {
 
     constructor(props){
-        super(props)
+        super(props);
 
-        this.state = {
-            title: "",
-            content: ""
-        };
+        this.state = this.props.note;
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,9 +25,9 @@ class NoteEditForm extends React.Component {
     handleSubmit(e){
         e.preventDefault();
 
-        this.props.updateNote(this.state);
-
-        this.props.closeModal();
+        this.props.updateNote(this.state).then(()=>{
+            this.props.closeModal();
+        });
     }
 
     render() {
