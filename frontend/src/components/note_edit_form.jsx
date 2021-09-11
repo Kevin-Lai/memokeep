@@ -12,6 +12,10 @@ class NoteEditForm extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.pinNote = this.pinNote.bind(this);
+        this.archiveNote = this.archiveNote.bind(this);
+        this.trashNote = this.trashNote.bind(this);
     }
 
     handleChange(type){
@@ -25,14 +29,45 @@ class NoteEditForm extends React.Component {
     handleSubmit(e){
         e.preventDefault();
 
+        if(this.state.pinned){
+            this.setState({
+                archived: false,
+                trashed: false
+            });
+        }
+
         this.props.updateNote(this.state).then(()=>{
             this.props.closeModal();
+        });
+    }
+
+    pinNote(){
+        // pinned state can be toggled on the edit form
+        this.setState({
+            pinned: !this.state.pinned
+        });
+    }
+
+    archiveNote(){
+        this.setState({
+            archived: true,
+            pinned: false
+        });
+    }
+
+    trashNote(){
+        this.setState({
+            trashed: true,
+            pinned: false
         });
     }
 
     render() {
         return(
             <>
+                <button onClick={()=>this.trashNote()}>Trash: {this.state.trashed ? "True" : "False"}</button>
+                <button onClick={()=>this.achiveNote()}>Archive: {this.state.archived ? "True" : "False"}</button>
+                <button onClick={()=>this.pinNote()}>Pin: {this.state.pinned ? "True" : "False"}</button>
                 <form onSubmit={this.handleSubmit} className="create-note-form">
                     <input type="text"
                         placeholder={"Title"}

@@ -1,27 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchNotes, deleteNote } from '../actions/note_actions';
-
-import { openModal } from '../actions/modal_actions';
+import { fetchNotes } from '../actions/note_actions';
 
 import NoteCreateForm from './note_create_form';
+import Note from './note';
+
 import './note.css';
 
 class NoteIndex extends React.Component {
 
-    constructor(props){
-        super(props);
-
-        this.handleDelete = this.handleDelete.bind(this);
-    }
-
     componentDidMount() {
         this.props.fetchNotes();
-    }
-
-    handleDelete(noteId){
-        //debugger
-        this.props.deleteNote(noteId);
     }
 
     render() {
@@ -30,7 +19,7 @@ class NoteIndex extends React.Component {
         let list = this.props.notes.map((note, index)=>{
             return(
                 <li className="note-list-item" key={"note #" + index}>
-                    <button onClick={()=>this.props.openModal({formType: 'edit', note: note})}>{`Title: ${note.title}, Content: ${note.content}`}</button> <button onClick={()=>this.handleDelete(note._id)}>Delete</button>
+                    <Note note={note}/>
                 </li>
             )
         });
@@ -55,9 +44,7 @@ const mstp = (state) => {
 
 const mdtp = (dispatch) => {
     return {
-        fetchNotes: () => dispatch(fetchNotes()),
-        deleteNote: (noteId) => dispatch(deleteNote(noteId)),
-        openModal: (modal) => dispatch(openModal(modal))
+        fetchNotes: () => dispatch(fetchNotes())
     }
 }
 

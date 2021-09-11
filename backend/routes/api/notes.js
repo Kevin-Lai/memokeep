@@ -21,7 +21,16 @@ router.post('/', (req, res) => {
 });
 
 router.patch('/:id', (req, res) => {
-    Note.findByIdAndUpdate(req.params.id, {title: req.body.title, content: req.body.content} , { new: true })
+
+    const reqUpdates = {
+        title: req.body.title,
+        content: req.body.content,
+        archived: req.body.archived,
+        trashed: req.body.trashed,
+        pinned: req.body.pinned
+    };
+
+    Note.findByIdAndUpdate(req.params.id, reqUpdates, { new: true })
         .then(note => res.json(note))
         .catch(err => res.status(404).json(err));
 });
