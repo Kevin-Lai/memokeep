@@ -9,6 +9,18 @@ router.get('/', (req, res) => {
         .catch(err => res.status(404).json(err))
 });
 
+router.get('/archive', (req, res) => {
+    Note.find({ archived: true })
+        .then(notes => res.json(notes))
+        .catch(err => res.status(404).json(err))
+});
+
+router.get('/trash', (req, res) => {
+    Note.find({ trashed: true })
+        .then(notes => res.json(notes))
+        .catch(err => res.status(404).json(err))
+});
+
 router.post('/', (req, res) => {
     const newNote = new Note({
         title: req.body.title,

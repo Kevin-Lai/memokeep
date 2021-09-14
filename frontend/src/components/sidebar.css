@@ -1,12 +1,15 @@
 .sidebar-list {
     display: flex;
     flex-direction: column;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .sidebar-block {
     display: block;
     position: absolute;
     left: 20px;
-
+    height: 90vh;
     border: solid black;
 }
