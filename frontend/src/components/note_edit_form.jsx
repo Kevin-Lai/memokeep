@@ -51,6 +51,7 @@ class NoteEditForm extends React.Component {
     archiveNote(){
         this.setState({
             archived: true,
+            trashed: false,
             pinned: false
         });
     }
@@ -58,6 +59,7 @@ class NoteEditForm extends React.Component {
     trashNote(){
         this.setState({
             trashed: true,
+            archived: false,
             pinned: false
         });
     }
