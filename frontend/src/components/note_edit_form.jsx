@@ -66,7 +66,7 @@ class NoteEditForm extends React.Component {
         return(
             <>
                 <button onClick={()=>this.trashNote()}>Trash: {this.state.trashed ? "True" : "False"}</button>
-                <button onClick={()=>this.achiveNote()}>Archive: {this.state.archived ? "True" : "False"}</button>
+                <button onClick={()=>this.archiveNote()}>Archive: {this.state.archived ? "True" : "False"}</button>
                 <button onClick={()=>this.pinNote()}>Pin: {this.state.pinned ? "True" : "False"}</button>
                 <form onSubmit={this.handleSubmit} className="create-note-form">
                     <input type="text"

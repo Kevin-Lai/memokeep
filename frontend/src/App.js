@@ -3,10 +3,11 @@ import './App.css';
 import { Provider } from 'react-redux';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
+import Modal from './components/modal';
 import NoteIndex from './components/note_index';
 import Sidebar from './components/sidebar';
-
-import Modal from './components/modal';
+import Archive from './components/archive';
+import Trash from './components/trash';
 
 function App({ store }) {
   return (
@@ -18,6 +19,8 @@ function App({ store }) {
           <Sidebar />
           <Switch>
             <Route exact path="/" component={NoteIndex} /> 
+            <Route exact path="/archive" component={Archive} />
+            <Route exact path="/trash" component={Trash} /> 
           </Switch>
         </HashRouter>
         </header>

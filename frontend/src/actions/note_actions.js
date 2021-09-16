@@ -35,6 +35,26 @@ export const fetchNotes = () => async dispatch => {
     }
 }
 
+export const fetchArchivedNotes = () => async dispatch => {
+    try {
+        const res = await axios.get('http://localhost:5000/api/notes/archive/');
+        dispatch(receiveNotes(res.data));
+    }
+    catch (err) {
+        console.log('Unable to get fetch notes');
+    }
+}
+
+export const fetchTrashedNotes = () => async dispatch => {
+    try {
+        const res = await axios.get('http://localhost:5000/api/notes/trash/');
+        dispatch(receiveNotes(res.data));
+    }
+    catch (err) {
+        console.log('Unable to get fetch notes');
+    }
+}
+
 export const fetchNote = (noteId) => async dispatch => {
     try {
         const res = await axios.get(`http://localhost:5000/api/notes/${noteId}`);
