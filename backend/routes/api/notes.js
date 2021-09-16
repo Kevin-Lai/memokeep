@@ -4,7 +4,7 @@ const router = express.Router();
 const Note = require("../../models/note");
 
 router.get('/', (req, res) => {
-    Note.find()
+    Note.find({ archived: false, trashed: false })
         .then(notes => res.json(notes))
         .catch(err => res.status(404).json(err))
 });
